@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Header.module.scss';
 import images from '../../../../assets/images';
+import Image from '../../../../components/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
@@ -29,6 +30,7 @@ import { Wrapper as PopperWrapper } from '../../../Poper';
 import AccountItem from '../../../AccountItem';
 import Button from '../../../Button';
 import Menu from '../../../Poper/Menu';
+import { MessageIcon, SearchIcon, UploadIcon } from '../../../Icons';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -123,7 +125,7 @@ function Header() {
                         <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>
                         <button className={cx('search-btn')}>
                             {/* search */}
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon></SearchIcon>
                         </button>
                     </div>
                 </HeadlessTippy>
@@ -133,12 +135,14 @@ function Header() {
                         <>
                             <Tippy trigger="click" placement="bottom" content="Upload Video">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload}></FontAwesomeIcon>
+                                    <UploadIcon></UploadIcon>
                                 </button>
                             </Tippy>
-                            <button className={cx('action-btn')}>
-                                <FontAwesomeIcon icon={faMessage}></FontAwesomeIcon>
-                            </button>
+                            <Tippy trigger="click" placement="bottom" content="Message">
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon></MessageIcon>
+                                </button>
+                            </Tippy>
                         </>
                     ) : (
                         <>
@@ -151,11 +155,12 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 src="https://p16-sign-sg.tiktokcdn.com/aweme/100x100/tos-alisg-avt-0068/000717011e758247a043a84990d1522c.jpeg?lk3s=a5d48078&x-expires=1711648800&x-signature=lhyTh5d7F8Bkcb7cznRmrpfFfWg%3D"
                                 alt="Hoaa"
-                            ></img>
+                                fallback=""
+                            ></Image>
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
