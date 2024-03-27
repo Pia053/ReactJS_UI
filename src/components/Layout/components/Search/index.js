@@ -41,7 +41,7 @@ function Search() {
 
     /**
         Note HeadlessTippy/ visible: true: show/false:hide 
-            onClickOutside: out click hide Tippy
+            onClickOutside: click out hide Tippy
      */
 
     // Logic:
