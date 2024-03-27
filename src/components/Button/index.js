@@ -22,8 +22,6 @@ function Button({
 }) {
     let Comp = 'button';
 
-    console.log(rounded);
-
     const props = {
         onClick,
         ...passProps,
