@@ -49,11 +49,13 @@ function Button({
         rounded,
         [className]: className,
     });
+
+
     return (
         <Comp {...props} className={classes}>
             {leftIcon && <span className={cx('icon')}>{leftIcon}</span>}
             <span className={cx('title')}>{children}</span>
-            {rightIcon && <span className={cx('rightIcon')}>{rightIcon}</span>}
+            {rightIcon && <span className={cx('icon')}>{rightIcon}</span>}
         </Comp>
     );
 }

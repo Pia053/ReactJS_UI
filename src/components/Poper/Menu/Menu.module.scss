@@ -9,6 +9,10 @@
 
 .menu-popper {
     padding-bottom: 8px;
+
+    .menu-body {
+        overflow-y: auto;
+    }
 }
 
 // Menu item
@@ -30,15 +34,18 @@
 
 // Header
 .header {
+    flex-shrink: 0;
+    display: flex;
     position: relative;
     height: 50px;
     margin-top: -8px;
 }
+
 .back-btn {
     width: 50px;
     height: 100%;
-    cursor: pointer;
     background-color: transparent;
+    cursor: pointer;
 }
 .header-title {
     position: absolute;

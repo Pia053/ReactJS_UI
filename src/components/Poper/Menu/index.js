@@ -40,6 +40,7 @@ function Menu({
 
     return (
         <Tippy
+            visible={true}
             hideOnClick={hideOnClick}
             delay={[0, 700]}
             offset={[12, 8]}
@@ -58,7 +59,7 @@ function Menu({
                                 }
                             ></Header>
                         )}
-                        {renderItems()}
+                        <div className={cx('menu-body')}> {renderItems()}</div>
                     </PopperWrapper>
                 </div>
             )}

@@ -34,6 +34,22 @@ const MENU_ITEMS = [
             data: [
                 { type: 'language', code: 'en', title: 'English' },
                 { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
+                { type: 'language', code: 'en', title: 'English' },
+                { type: 'language', code: 'vn', title: 'Việt Nam' },
             ],
         },
     },
@@ -48,7 +64,7 @@ const MENU_ITEMS = [
     },
 ];
 function Header() {
-    const currentUser = true;
+    const currentUser = false;
 
     const handleMenuChange = (menuItem) => {
         console.log(menuItem);
