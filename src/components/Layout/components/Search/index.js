@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +9,8 @@ import { SearchIcon } from '../../../Icons';
 import AccountItem from '../../../AccountItem';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDebounce } from '../../../../hooks/index.js';
+import * as searchService from '../../../../api/service/searchService.js';
 
 const cx = classNames.bind(styles);
 
@@ -16,6 +19,15 @@ function Search() {
     const [searchResult, setSearchResilt] = useState([]);
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
+
+    // Note Logic:
+    /**
+     * 1. setSearchValue("") => useDebounce init = ""
+     *     sang deps thay đổi check if(.trim()) => return;
+     * 2. setSearchValue("h") => useDebounce init = (lấy lần 1)
+     *      lọt deps của useEffect of useDebounce settimeout(setDebouncedValue(value),500) : 500s sau mới set và return
+     */
+    const debounced = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
@@ -29,16 +41,15 @@ function Search() {
 
         setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResilt(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
-    }, [searchValue]);
+        const fethApi = async () => {
+            const result = await searchService.search(debounced);
+            setSearchResilt(result);
+
+            setLoading(false);
+        };
+
+        fethApi();
+    }, [debounced]);
 
     // hanldeHideResult
     const handleHideResult = () => {
@@ -70,7 +81,10 @@ function Search() {
                     <PopperWrapper>
                         <h4 className={cx('search-title')}>Account</h4>
                         {searchResult.map((result) => (
-                            <AccountItem key={result.id} data={result}></AccountItem>
+                            <AccountItem
+                                key={result.id}
+                                data={result}
+                            ></AccountItem>
                         ))}
                     </PopperWrapper>
                 </div>
@@ -95,7 +109,12 @@ function Search() {
                 )}
 
                 {/* Loadding */}
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>}
+                {loading && (
+                    <FontAwesomeIcon
+                        className={cx('loading')}
+                        icon={faSpinner}
+                    ></FontAwesomeIcon>
+                )}
 
                 <button className={cx('search-btn')}>
                     {/* search */}
