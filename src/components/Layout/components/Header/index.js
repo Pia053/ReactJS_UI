@@ -21,6 +21,8 @@ import Button from '../../../Button';
 import Menu from '../../../Poper/Menu';
 import { MessageIcon, UploadIcon, InboxIcon } from '../../../Icons';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
+import routesConfig from '../../../../config/routes';
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -81,27 +83,42 @@ function Header() {
             separate: true,
         },
     ];
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <img src={images.logo} alt="logo"></img>
+                <Link to={routesConfig.home} className={cx('logo-link')}>
+                    <img src={images.logo} alt="logo"></img>
+                </Link>
 
                 <Search></Search>
 
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy trigger="click" placement="bottom" content="Upload Video">
+                            <Tippy
+                                trigger="click"
+                                placement="bottom"
+                                content="Upload Video"
+                            >
                                 <button className={cx('action-btn')}>
                                     <UploadIcon></UploadIcon>
                                 </button>
                             </Tippy>
-                            <Tippy trigger="click" placement="bottom" content="Message">
+                            <Tippy
+                                trigger="click"
+                                placement="bottom"
+                                content="Message"
+                            >
                                 <button className={cx('action-btn')}>
                                     <MessageIcon></MessageIcon>
                                 </button>
                             </Tippy>
-                            <Tippy trigger="click" placement="bottom" content="Inbox">
+                            <Tippy
+                                trigger="click"
+                                placement="bottom"
+                                content="Inbox"
+                            >
                                 <button className={cx('action-btn')}>
                                     <InboxIcon></InboxIcon>
                                 </button>
@@ -110,13 +127,24 @@ function Header() {
                     ) : (
                         <>
                             <Button text>Upload</Button>
-                            <Button to="/login" primary leftIcon={<FontAwesomeIcon icon={faSignIn}></FontAwesomeIcon>}>
+                            <Button
+                                to="/login"
+                                primary
+                                leftIcon={
+                                    <FontAwesomeIcon
+                                        icon={faSignIn}
+                                    ></FontAwesomeIcon>
+                                }
+                            >
                                 Log In
                             </Button>
                         </>
                     )}
 
-                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                    <Menu
+                        items={currentUser ? userMenu : MENU_ITEMS}
+                        onChange={handleMenuChange}
+                    >
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
@@ -126,7 +154,9 @@ function Header() {
                             ></Image>
                         ) : (
                             <button className={cx('more-btn')}>
-                                <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
+                                <FontAwesomeIcon
+                                    icon={faEllipsisVertical}
+                                ></FontAwesomeIcon>
                             </button>
                         )}
                     </Menu>

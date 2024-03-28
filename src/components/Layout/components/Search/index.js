@@ -63,6 +63,17 @@ function Search() {
         inputRef.current.focus();
     };
 
+    //
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
+    };
+
+    //
+
     // !searchValue = true ; !!searhValue = false
     // EG: !!value = null => false; !!value = "hello" => true
 
@@ -95,7 +106,7 @@ function Search() {
                 <input
                     ref={inputRef}
                     value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     placeholder="Search account and video"
                     spellCheck="false"
                     onFocus={() => setShowResult(true)}
@@ -116,7 +127,10 @@ function Search() {
                     ></FontAwesomeIcon>
                 )}
 
-                <button className={cx('search-btn')}>
+                <button
+                    onMouseDown={(e) => e.preventDefault}
+                    className={cx('search-btn')}
+                >
                     {/* search */}
                     <SearchIcon></SearchIcon>
                 </button>
